@@ -4083,8 +4083,11 @@ int com_derive_affine_constructed_candidate( int cu_width, int cu_height, int cp
 
 /* merge affine mode */
 #if BGC_EXT
-int com_get_affine_merge_candidate(COM_INFO *info, COM_MODE *mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP *pic_map,
-    s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], int mrg_list_cp_num[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_flag[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_idx[AFF_MAX_NUM_MRG], int ptr)
+/*--------------------------------------------------wangfeng--------------------------------------------------*/
+// int com_get_affine_merge_candidate(COM_INFO *info, COM_MODE *mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP *pic_map,
+//     s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], int mrg_list_cp_num[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_flag[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_idx[AFF_MAX_NUM_MRG], int ptr)
+int com_get_affine_merge_candidate(COM_INFO* info, COM_MODE* mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP* pic_map,
+    s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], u8 cpmv_idx[AFF_MAX_NUM_MRG], int mrg_list_cp_num[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_flag[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_idx[AFF_MAX_NUM_MRG], int ptr)
 #else
 int com_get_affine_merge_candidate(COM_INFO *info, COM_MODE *mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP *pic_map,
     s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], int mrg_list_cp_num[AFF_MAX_NUM_MRG], int ptr)
@@ -4190,6 +4193,8 @@ int com_get_affine_merge_candidate(COM_INFO *info, COM_MODE *mod_info_curr, COM_
                     mrg_list_bgc_idx[cnt] = 0;
                 }
 #endif
+                /*--------------------------------------------------wangfeng--------------------------------------------------*/
+                cpmv_idx[cnt] = k;
                 cnt++;
             }
 
@@ -4372,12 +4377,14 @@ int com_get_affine_merge_candidate(COM_INFO *info, COM_MODE *mod_info_curr, COM_
         for (idx = 0; idx < const_num; idx++)
         {
             int const_idx = const_order[idx];
+            if (
 #if BGC_EXT
-            com_derive_affine_constructed_candidate(cu_width, cu_height, cp_valid, cp_mv, cp_refi, const_model[const_idx], const_idx, cp_num[const_idx], mrg_list_cpmv, mrg_list_refi, mrg_list_cp_num, &cnt, mrg_list_bgc_flag, mrg_list_bgc_idx, ((idx == 3) ? nei_bgc_flag[1] : nei_bgc_flag[0]), ((idx == 3) ? nei_bgc_idx[1] : nei_bgc_idx[0]));
+            com_derive_affine_constructed_candidate(cu_width, cu_height, cp_valid, cp_mv, cp_refi, const_model[const_idx], const_idx, cp_num[const_idx], mrg_list_cpmv, mrg_list_refi, mrg_list_cp_num, &cnt, mrg_list_bgc_flag, mrg_list_bgc_idx, ((idx == 3) ? nei_bgc_flag[1] : nei_bgc_flag[0]), ((idx == 3) ? nei_bgc_idx[1] : nei_bgc_idx[0]))
 #else
             com_derive_affine_constructed_candidate(cu_width, cu_height, cp_valid, cp_mv, cp_refi, const_model[const_idx], const_idx, cp_num[const_idx], mrg_list_cpmv, mrg_list_refi, mrg_list_cp_num, &cnt);
 #endif
-        }
+            ) cpmv_idx[cnt - 1] = const_idx + 5;
+        } 
     }
 
     // Zero padding

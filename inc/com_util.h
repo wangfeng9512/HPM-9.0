@@ -289,8 +289,11 @@ void com_set_affine_mvf(COM_INFO *info, COM_MODE *mod_info_curr, COM_REFP(*refp)
 void com_set_awp_mvf(COM_INFO *info, COM_MODE *mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP *pic_map);
 #endif
 #if BGC_EXT
+/*--------------------------------------------------wangfeng--------------------------------------------------*/
+// int com_get_affine_merge_candidate(COM_INFO* info, COM_MODE* mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP* pic_map,
+//     s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], int mrg_list_cp_num[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_flag[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_idx[AFF_MAX_NUM_MRG], int ptr);
 int com_get_affine_merge_candidate(COM_INFO *info, COM_MODE *mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP *pic_map,
-    s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], int mrg_list_cp_num[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_flag[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_idx[AFF_MAX_NUM_MRG], int ptr);
+    s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], u8 cpmv_idx[AFF_MAX_NUM_MRG], int mrg_list_cp_num[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_flag[AFF_MAX_NUM_MRG], s8 mrg_list_bgc_idx[AFF_MAX_NUM_MRG], int ptr);
 #else
 int com_get_affine_merge_candidate(COM_INFO *info, COM_MODE *mod_info_curr, COM_REFP(*refp)[REFP_NUM], COM_MAP *pic_map,
     s8 mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM], CPMV mrg_list_cpmv[AFF_MAX_NUM_MRG][REFP_NUM][VER_NUM][MV_D], int mrg_list_cp_num[AFF_MAX_NUM_MRG], int ptr);

@@ -1,1 +1,16 @@
-﻿
+﻿  enc.c
+  enc_bsw.c
+  enc_eco.c
+  enc_EncAdaptiveLoopFilter.c
+  enc_esao.c
+  enc_mode.c
+  enc_pinter.c
+  enc_pintra.c
+  enc_sad.c
+  enc_tbl.c
+  enc_tq.c
+  enc_util.c
+  enc_pibc.c
+  enc_sp.cpp
+  enc_ibc_hashmap.cpp
+  enc_lib_vs2017.vcxproj -> G:\HPM-9.0\lib\encoder_lib.lib

@@ -1,6 +1,5 @@
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\vc142.pdb
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_sao.obj
-g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_util.obj
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_tbl.obj
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_recon.obj
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_mc.obj
@@ -11,10 +10,6 @@ g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_img.obj
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_esao.obj
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_df.obj
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\com_comadaptiveloopfilter.obj
-g:\hpm-9.0\lib\common_lib.lib
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\common_lib.tlog\cl.command.1.tlog
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\common_lib.tlog\cl.read.1.tlog
 g:\hpm-9.0\build\x86_windows\x64\release\common_lib\common_lib.tlog\cl.write.1.tlog
-g:\hpm-9.0\build\x86_windows\x64\release\common_lib\common_lib.tlog\lib-link.read.1.tlog
-g:\hpm-9.0\build\x86_windows\x64\release\common_lib\common_lib.tlog\lib-link.write.1.tlog
-g:\hpm-9.0\build\x86_windows\x64\release\common_lib\common_lib.tlog\lib.command.1.tlog

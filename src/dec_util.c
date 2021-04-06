@@ -352,9 +352,13 @@ void dec_derive_skip_direct_info(DEC_CTX * ctx, DEC_CORE * core)
 #endif
         int cp_idx, lidx;
         int mrg_idx = mod_info_curr->skip_idx;
+        /*--------------------------------------------------wangfeng--------------------------------------------------*/
+        u8 cpmv_idx[5];
 
 #if BGC_EXT
-        com_get_affine_merge_candidate(&ctx->info, mod_info_curr, ctx->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
+        /*--------------------------------------------------wangfeng--------------------------------------------------*/
+        // com_get_affine_merge_candidate(&ctx->info, mod_info_curr, ctx->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
+        com_get_affine_merge_candidate(&ctx->info, mod_info_curr, ctx->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, cpmv_idx, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
 #else
         com_get_affine_merge_candidate(&ctx->info, mod_info_curr, ctx->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, ctx->ptr);
 #endif

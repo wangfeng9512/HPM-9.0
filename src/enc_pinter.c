@@ -3232,6 +3232,8 @@ static void analyze_direct_skip(ENC_CTX *ctx, ENC_CORE *core, double *cost_best)
 static void analyze_affine_merge( ENC_CTX *ctx, ENC_CORE *core, double *cost_best )
 {
     COM_MODE *mod_info_curr = &core->mod_info_curr;
+    /*--------------------------------------------------wangfeng--------------------------------------------------*/
+    COM_MODE* mod_info_best = &core->mod_info_best;
     ENC_PINTER *pi = &ctx->pinter;
     pel          *y_org, *u_org, *v_org;
     s8           mrg_list_refi[AFF_MAX_NUM_MRG][REFP_NUM];
@@ -3266,8 +3268,13 @@ static void analyze_affine_merge( ENC_CTX *ctx, ENC_CORE *core, double *cost_bes
 #if AFFINE_UMVE
     mod_info_curr->affine_umve_flag = 0;
 #endif
+    /*--------------------------------------------------wangfeng--------------------------------------------------*/
+    u8 cpmv_idx[AFF_MAX_NUM_MRG];
+    memset(cpmv_idx, 100, AFF_MAX_NUM_MRG);
 #if BGC_EXT
-    num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
+    /*--------------------------------------------------wangfeng--------------------------------------------------*/
+    // num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
+    num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, cpmv_idx, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
 #else
     num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, ctx->ptr);
 #endif
@@ -3364,6 +3371,8 @@ static void analyze_affine_merge( ENC_CTX *ctx, ENC_CORE *core, double *cost_bes
 #endif
         check_best_mode( core, pi, cost, cost_best );
     }
+    /*--------------------------------------------------wangfeng--------------------------------------------------*/
+    printf("best cpmv: (%d, %d), location: %d\n", mrg_list_cp_mv[mod_info_best->skip_idx][REFP_0][mod_info_best->refi[REFP_0]][MV_X], mrg_list_cp_mv[mod_info_best->skip_idx][REFP_0][mod_info_best->refi[REFP_0]][MV_Y], cpmv_idx[mod_info_best->skip_idx]);
 }
 
 #if AFFINE_UMVE
@@ -3461,8 +3470,12 @@ static void analyze_affine_umve(ENC_CTX *ctx, ENC_CORE *core, double *cost_best)
     pi->curr_mvr = 0;
     mod_info_curr->mvr_idx = 0;
     mod_info_curr->affine_flag = 1;
+    /*--------------------------------------------------wangfeng--------------------------------------------------*/
+    u8 cpmv_idx[5];
 #if BGC_EXT
-    num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
+    /*--------------------------------------------------wangfeng--------------------------------------------------*/
+    // num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
+    num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, cpmv_idx, mrg_list_cp_num, mrg_list_bgc_flag, mrg_list_bgc_idx, ctx->ptr);
 #else
     num_cands = com_get_affine_merge_candidate(&ctx->info, mod_info_curr, pi->refp, &ctx->map, mrg_list_refi, mrg_list_cp_mv, mrg_list_cp_num, ctx->ptr);
 #endif
@@ -6361,7 +6374,7 @@ static u32 pinter_affine_me_gradient(ENC_PINTER * pi, int x, int y, int cu_width
     {
         iter_num = bi ? (AF_ITER_BI - 2) : (AF_ITER_UNI - 2);
     }
-    /*--------------------------------------------------wangfewng--------------------------------------------------*/
+    /*--------------------------------------------------wangfeng--------------------------------------------------*/
     // for (iter = 0; iter < iter_num; iter++)
     for (iter = 0; iter < 1; iter++) // 将计算Affine运动估计梯度的迭代次数由3次（双向搜索迭代次数）或5次（单向搜索迭代次数）减少为1次
     {
@@ -7326,7 +7339,7 @@ double analyze_inter_cu(ENC_CTX *ctx, ENC_CORE *core)
         {
 #if BD_AFFINE_AMVR
             int num_affine_amvr = ctx->info.sqh.amvr_enable_flag ? MAX_NUM_AFFINE_MVR : 1;
-            /*--------------------------------------------------wangfewng--------------------------------------------------*/
+            /*--------------------------------------------------wangfeng--------------------------------------------------*/
             // for (pi->curr_mvr = 0; pi->curr_mvr < num_affine_amvr; pi->curr_mvr++)
             for (pi->curr_mvr = 0; pi->curr_mvr < 1; pi->curr_mvr++) // 将Affine-AMVR的精度只保留了1/4精度
             {
