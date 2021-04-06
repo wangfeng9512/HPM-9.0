@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommandArguments>--config D:\AVS\2021-2\Test\hpm-RA-test-turnoff-amvr-2\encode_IPPP.cfg -w 176 -h 144 -z 25 -f 50 -i D:\AVS\Seq\tets_seq\akiyo_qcif.yuv -o D:\AVS\2021-2\Test-output\stream\out.avs3 --op_qp 33 &gt; D:\AVS\2021-2\Test-output\log\out.log</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerCommandArguments>--config D:\AVS\2021-2\Test\hpm-RA-test-turnoff-amvr-2\encode_IPPP.cfg -s 1 -w 176 -h 144 -z 25 -f 50 -i D:\AVS\Seq\tets_seq\akiyo_qcif.yuv -o D:\AVS\2021-2\Test-output\stream\out.avs3 --op_qp 33 &gt; D:\AVS\2021-2\Test-output\log\out.log</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>

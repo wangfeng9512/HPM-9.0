@@ -6361,7 +6361,9 @@ static u32 pinter_affine_me_gradient(ENC_PINTER * pi, int x, int y, int cu_width
     {
         iter_num = bi ? (AF_ITER_BI - 2) : (AF_ITER_UNI - 2);
     }
-    for (iter = 0; iter < iter_num; iter++)
+    /*--------------------------------------------------wangfewng--------------------------------------------------*/
+    // for (iter = 0; iter < iter_num; iter++)
+    for (iter = 0; iter < 1; iter++) // 将计算Affine运动估计梯度的迭代次数由3次（双向搜索迭代次数）或5次（单向搜索迭代次数）减少为1次
     {
         int row, col;
         int all_zero = 0;
@@ -7324,7 +7326,9 @@ double analyze_inter_cu(ENC_CTX *ctx, ENC_CORE *core)
         {
 #if BD_AFFINE_AMVR
             int num_affine_amvr = ctx->info.sqh.amvr_enable_flag ? MAX_NUM_AFFINE_MVR : 1;
-            for (pi->curr_mvr = 0; pi->curr_mvr < num_affine_amvr; pi->curr_mvr++)
+            /*--------------------------------------------------wangfewng--------------------------------------------------*/
+            // for (pi->curr_mvr = 0; pi->curr_mvr < num_affine_amvr; pi->curr_mvr++)
+            for (pi->curr_mvr = 0; pi->curr_mvr < 1; pi->curr_mvr++) // 将Affine-AMVR的精度只保留了1/4精度
             {
 #endif
                 analyze_affine_uni(ctx, core, aff_mv_L0L1, refi_L0L1, cost_L0L1, &cost_best);

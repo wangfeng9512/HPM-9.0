@@ -1,0 +1,6 @@
+﻿  dec.c
+  dec_bsr.c
+  dec_DecAdaptiveLoopFilter.c
+  dec_eco.c
+  dec_util.c
+  dec_lib_vs2017.vcxproj -> G:\HPM-9.0\lib\decoder_lib.lib

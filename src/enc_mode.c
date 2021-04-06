@@ -4652,6 +4652,11 @@ static double mode_coding_tree(ENC_CTX *ctx, ENC_CORE *core, int x0, int y0, int
         {
             split_allow[NO_SPLIT] = 0;
         }
+        /*--------------------------------------------------wangfewng--------------------------------------------------*/
+        if (!boundary && (cu_width == cu_height * 8 || cu_height == cu_width * 8))
+        {
+            split_allow[NO_SPLIT] = 0;
+        }
         /***************************** Step 3: reduce split modes by fast algorithm ********************************/
 #if FS_SAME_SIZE_PER_X_CTU
         assert(FS_ALL_COMBINATION == 0);
